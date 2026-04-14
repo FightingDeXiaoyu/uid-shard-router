@@ -28,6 +28,7 @@ This project packages the common logic into one tiny reusable component:
 - Route by `long` user id
 - Support `MODULO` and `MIXED_MODULO` hash strategies
 - Build final table names like `user_profile_007`
+- Support single uid, comma-separated uid lists, and uid files in the CLI
 - Generate route metadata for automation or logging
 - Run as either embedded library or standalone CLI
 
@@ -61,9 +62,50 @@ Example output:
 
 ```text
 uid=10002345
-hash=1278892638
-shardIndex=30
-physicalTable=user_order_030
+hash=1992740095
+shardIndex=63
+physicalTable=user_order_063
+```
+
+### CLI batch mode
+
+You can also route multiple uids in one execution.
+
+Comma-separated list:
+
+```powershell
+java -cp out io.github.fightingdexiaoyu.uidshardrouter.cli.ShardCli --table user_order --uid-list 10002345,10002346,10002347 --shards 64 --width 3 --strategy MIXED_MODULO
+```
+
+UID file:
+
+```text
+10002345
+10002346
+10002347
+```
+
+```powershell
+java -cp out io.github.fightingdexiaoyu.uidshardrouter.cli.ShardCli --table user_order --uid-file uids.txt --shards 64 --width 3 --strategy MIXED_MODULO
+```
+
+Batch output example:
+
+```text
+uid=10002345
+hash=1992740095
+shardIndex=63
+physicalTable=user_order_063
+
+uid=10002346
+hash=61991608
+shardIndex=56
+physicalTable=user_order_056
+
+uid=10002347
+hash=1536963592
+shardIndex=8
+physicalTable=user_order_008
 ```
 
 ## API overview
