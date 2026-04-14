@@ -1,5 +1,8 @@
 # uid-shard-router
 
+[![CI](https://github.com/FightingDeXiaoyu/uid-shard-router/actions/workflows/ci.yml/badge.svg)](https://github.com/FightingDeXiaoyu/uid-shard-router/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
+
 `uid-shard-router` is a small zero-dependency Java library and CLI for deterministic user-id based table routing.
 
 It helps backend teams answer questions like:
@@ -76,6 +79,20 @@ physicalTable=user_order_030
 ```text
 src/main/java
 src/test/java
+examples/basic-usage
+```
+
+## Example program
+
+See [examples/basic-usage/BasicUsageExample.java](./examples/basic-usage/BasicUsageExample.java) for a minimal embedded usage example.
+
+Compile and run it together with the library:
+
+```powershell
+$main = Get-ChildItem -Recurse -Filter *.java src\main\java | ForEach-Object { $_.FullName }
+$example = Get-ChildItem -Recurse -Filter *.java examples\basic-usage | ForEach-Object { $_.FullName }
+javac -d out $main $example
+java -cp out BasicUsageExample
 ```
 
 ## Local development
@@ -124,3 +141,10 @@ This repository is intentionally small but complete:
 - straightforward roadmap for future PRs
 
 That makes it a credible seed project for an open source profile, especially if you keep iterating on examples, integrations, and published releases.
+
+## Maintainer workflow
+
+- Track user-facing changes in [CHANGELOG.md](./CHANGELOG.md)
+- Use the built-in issue templates for bugs and feature requests
+- Use the pull request template to keep reviews consistent
+- Publish tagged releases as the feature set grows
